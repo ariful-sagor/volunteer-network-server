@@ -27,13 +27,14 @@ client.connect(err => {
       })
   })
   app.post('/addVolunteer', (req, res) => {
-    const volunteer= req.body;
-    console.log(volunteer)
-    addVolunteer.insertOne(volunteer)
+    const task= req.body;
+    console.log(task)
+    addVolunteer.insertOne(task)
     .then(result =>{
         console.log(result.insertedCount)
     })
 })
+
   app.get('/tasks', (req, res) => {
       taskCollection.find({})
       .toArray((err, documents)=>{
@@ -72,3 +73,4 @@ app.get('/', (req, res) => {
 
 
 app.listen(process.env.PORT || port)
+
