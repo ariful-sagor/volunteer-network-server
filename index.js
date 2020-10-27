@@ -32,8 +32,8 @@ client.connect(err => {
     addVolunteer.insertOne(task)
     .then(result =>{
         console.log(result.insertedCount)
+        })
     })
-})
 
   app.get('/tasks', (req, res) => {
       taskCollection.find({})
@@ -54,16 +54,16 @@ client.connect(err => {
       .toArray((err, documents)=>{
           res.send(documents[kk])
       })
-  })
+    })
   app.get('/tasks/:id', (req, res) => {
      let kk= req.params.id
     taskCollection.find({taskId: req.params.taskId})
     .toArray((err, documents)=>{
         res.send(documents[kk])
+        })
     })
-})
-    app.delete('/cancel-event',(req,res)=>{
-        taskCollection.deleteOne({_id:ObjectID(req.headers.id)})
+    app.delete('/cancel-event/:id',(req,res)=>{
+        taskCollection.deleteOne({_id:ObjectID(req.params.id)})
         .then(result=>{
         res.send(result.deletedCount>0)
         })
