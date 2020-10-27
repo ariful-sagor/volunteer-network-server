@@ -4,6 +4,8 @@ require('dotenv').config()
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const ObjectID = require('mongodb').ObjectID
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dm8wp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 
@@ -62,6 +64,9 @@ client.connect(err => {
         res.send(documents[kk])
         })
     })
+
+    // Delete task 
+    
     app.delete('/cancel-event/:id',(req,res)=>{
         taskCollection.deleteOne({_id:ObjectID(req.params.id)})
         .then(result=>{
@@ -70,6 +75,11 @@ client.connect(err => {
     }) 
   
 });
+
+
+
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World Sagor')
