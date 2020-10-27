@@ -62,8 +62,12 @@ client.connect(err => {
         res.send(documents[kk])
     })
 })
-  
-  
+    app.delete('/cancel-event',(req,res)=>{
+        taskCollection.deleteOne({_id:ObjectID(req.headers.id)})
+        .then(result=>{
+        res.send(result.deletedCount>0)
+        })
+    }) 
   
 });
 
