@@ -36,7 +36,8 @@ client.connect(err => {
 })
 
   app.get('/tasks', (req, res) => {
-      taskCollection.find({})
+      const search= req.query.search;
+      taskCollection.find({name: {$regex: search}})
       .toArray((err, documents)=>{
           res.send(documents)
 
